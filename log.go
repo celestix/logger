@@ -24,9 +24,14 @@ import (
 	"sync"
 )
 
+// Logger is the main struct of the library which implements methods for logging.
+//
+// Name (type string): Name of the new module you want to inherit into.
+// Level (type Level): Current running level of the logger.
+// NoColor (type bool): Enable it if you want to disable colors.
 type Logger struct {
 	Name        string
-	Level       level
+	Level       Level
 	NoColor     bool
 	out         *os.File
 	mutex       *sync.Mutex
@@ -35,12 +40,14 @@ type Logger struct {
 	projectName string
 }
 
+// LoggerOpts contain all the optional fields of New Logger.
 type LoggerOpts struct {
 	ProjectName  string
 	NoColor      bool
-	MinimumLevel level
+	MinimumLevel Level
 }
 
+// New function creates a new logger.
 func New(out *os.File, opts *LoggerOpts) *Logger {
 	if opts == nil {
 		opts = &LoggerOpts{}
@@ -58,6 +65,7 @@ func New(out *os.File, opts *LoggerOpts) *Logger {
 	}
 }
 
+// Print method is used to print the provided arguments with custom settings.
 func (l *Logger) Print(v ...any) {
 	if !l.shouldDo() {
 		return
@@ -65,10 +73,11 @@ func (l *Logger) Print(v ...any) {
 	if l.NoColor {
 		l.print(fmt.Sprint(v...))
 	} else {
-		l.colorPrint(levelToColor[l.Level], fmt.Sprint(v...))
+		l.colorPrint(LevelToColor[l.Level], fmt.Sprint(v...))
 	}
 }
 
+// Printf method is used to format the provided string with the arguments and print the result with custom settings.
 func (l *Logger) Printf(format string, a ...any) {
 	if !l.shouldDo() {
 		return
@@ -76,10 +85,11 @@ func (l *Logger) Printf(format string, a ...any) {
 	if l.NoColor {
 		l.print(fmt.Sprintf(format, a...))
 	} else {
-		l.colorPrint(levelToColor[l.Level], fmt.Sprintf(format, a...))
+		l.colorPrint(LevelToColor[l.Level], fmt.Sprintf(format, a...))
 	}
 }
 
+// Println method is used to print the provided arguments in a newline with custom settings.
 func (l *Logger) Println(v ...any) {
 	if !l.shouldDo() {
 		return
@@ -87,10 +97,11 @@ func (l *Logger) Println(v ...any) {
 	if l.NoColor {
 		l.print(fmt.Sprintln(v...))
 	} else {
-		l.colorPrint(levelToColor[l.Level], fmt.Sprintln(v...))
+		l.colorPrint(LevelToColor[l.Level], fmt.Sprintln(v...))
 	}
 }
 
+// Printlnf method is used to format the provided string with the arguments and print the result in a newline with custom settings.
 func (l *Logger) Printlnf(format string, a ...any) {
 	if !l.shouldDo() {
 		return
@@ -98,20 +109,23 @@ func (l *Logger) Printlnf(format string, a ...any) {
 	if l.NoColor {
 		l.print(fmt.Sprintf(format+"\n", a...))
 	} else {
-		l.colorPrint(levelToColor[l.Level], fmt.Sprintf(format, a...))
+		l.colorPrint(LevelToColor[l.Level], fmt.Sprintf(format, a...))
 	}
 }
 
-func (l *Logger) ChangeLevel(level level) *Logger {
+// ChangeLevel method should be used to change the level of current logger.
+func (l *Logger) ChangeLevel(level Level) *Logger {
 	l.Level = level
 	return l
 }
 
-func (l *Logger) ChangeMinima(minimumLevel level) *Logger {
+// ChangeMinimumLevel method should be used to change the minimum printable level of current logger.
+func (l *Logger) ChangeMinimumLevel(minimumLevel Level) *Logger {
 	l.minima = LevelToNum[minimumLevel]
 	return l
 }
 
+// Create method is used when you want to initalise logger for a new module, parent logger will be inherited with a few mutations.
 func (l *Logger) Create(name string) *Logger {
 	l1 := &(*l)
 	l1.Name = fmt.Sprintf("%s[%s]", l.Name, strings.ToUpper(name))

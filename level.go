@@ -17,22 +17,39 @@
 
 package logger
 
-type level string
+// Level type is to define the logging levels, which would be used for saturating logs.
+//
+// Note: In case you create new levels, they must be added to the LevelToNum and LevelToColor maps.
+type Level string
 
 var (
-	LevelMain     level = "MAIN"
-	LevelInfo     level = "INFO"
-	LevelError    level = "ERROR"
-	LevelCritical level = "CRITICAL"
+	// LevelDebug is the DEBUG level which should be used for debugging.
+	LevelDebug Level = "DEBUG"
+	// LevelMain is the MAIN level which should be used for logging main arguments.
+	LevelMain Level = "MAIN"
+	// LevelInfo is the INFO level which should be used for logging all basic arguments.
+	LevelInfo Level = "INFO"
+	// LevelError is the ERROR level which should be used for logging all errors.
+	LevelError Level = "ERROR"
+	// LevelCritical is the CRITICAL level which should be used for logging all critical things.
+	LevelCritical Level = "CRITICAL"
 
-	LevelToNum = map[level]int{
+	// LevelToNum map converts the provided level to its integral value.
+	//
+	// One should add custom created levels to this map for proper functioning.
+	LevelToNum = map[Level]int{
+		LevelDebug:    -1,
 		LevelInfo:     0,
 		LevelMain:     1,
 		LevelError:    2,
 		LevelCritical: 3,
 	}
 
-	levelToColor = map[level]color{
+	// LevelToColor map converts the provided level to its defined color.
+	//
+	// One should add custom created levels to this map for proper functioning.
+	LevelToColor = map[Level]color{
+		LevelDebug:    white,
 		LevelInfo:     blue,
 		LevelMain:     green,
 		LevelError:    purple,
