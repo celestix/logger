@@ -1,4 +1,4 @@
-// Logger-Go (github.com/anonyindian/logger-go)
+// Logger-Go (github.com/anonyindian/logger)
 // Copyright (C) 2022
 // Veer Pratap Singh <hello@veer.codes>
 //

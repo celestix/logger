@@ -1,9 +1,9 @@
 # Logger
 Logger is a package designed for logging in modular programs specifically, It contains many cool features like colorised logging, different logging levels, etc.
 
-You can use this package to implement logging in your Go program, for any futher help you can check out the [documentations](https://pkg.go.dev/github.com/anonyindian/logger-go).
+You can use this package to implement logging in your Go program, for any futher help you can check out the [documentations](https://pkg.go.dev/github.com/anonyindian/logger).
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/anonyindian/logger-go.svg)](https://pkg.go.dev/github.com/anonyindian/logger-go) [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
+[![Go Reference](https://pkg.go.dev/badge/github.com/anonyindian/logger.svg)](https://pkg.go.dev/github.com/anonyindian/logger) [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 
 **Note**: This library is in the alpha stage yet and doesn't cover every aspect of logging.
 
@@ -11,14 +11,14 @@ You can use this package to implement logging in your Go program, for any futher
 You can download the library with the help of standard `go get` command.
 
 ```bash
-go get github.com/anonyindian/logger-go
+go get github.com/anonyindian/logger
 ```
 
 ## Usage
 ```go
 package main
 import (
-	logger "github.com/anonyindian/logger-go"
+	logger "github.com/anonyindian/logger"
     "os"
 )
 func main() {
