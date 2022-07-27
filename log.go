@@ -133,7 +133,7 @@ func (l *Logger) Create(name string) *Logger {
 }
 
 func (l *Logger) shouldDo() bool {
-	return LevelToNum[l.Level] > l.minima
+	return LevelToNum[l.Level] >= l.minima
 }
 
 func (l *Logger) rawNewline() string {
