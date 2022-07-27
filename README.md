@@ -22,7 +22,7 @@ import (
     "os"
 )
 func main() {
-    log := log.New(os.Stderr, nil)
+    log := logger.New(os.Stderr, nil)
     log.Println("Hello World")
 }
 ```
