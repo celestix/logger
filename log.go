@@ -127,9 +127,9 @@ func (l *Logger) ChangeMinimumLevel(minimumLevel Level) *Logger {
 
 // Create method is used when you want to initalise logger for a new module, parent logger will be inherited with a few mutations.
 func (l *Logger) Create(name string) *Logger {
-	l1 := &(*l)
+	l1 := *l
 	l1.Name = fmt.Sprintf("%s[%s]", l.Name, strings.ToUpper(name))
-	return l1
+	return &l1
 }
 
 func (l *Logger) shouldDo() bool {
