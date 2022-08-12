@@ -109,7 +109,7 @@ func (l *Logger) Printlnf(format string, a ...any) {
 	if l.NoColor {
 		l.print(fmt.Sprintf(format+"\n", a...))
 	} else {
-		l.colorPrint(LevelToColor[l.Level], fmt.Sprintf(format, a...))
+		l.colorPrint(LevelToColor[l.Level], fmt.Sprintf(format+"\n", a...))
 	}
 }
 
